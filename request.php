@@ -37,11 +37,11 @@ Class Request{
         $sign_type = $this->cfg->C('sign_type');
         
         if ($sign_type == 'MD5') {
-            //$this->reqHandler->setKey($this->cfg->C('key'));
+            $this->reqHandler->setKey($this->cfg->C('key'));
             $this->resHandler->setKey($this->cfg->C('key'));
             $this->reqHandler->setSignType($sign_type);
         } else if ($sign_type == 'RSA_1_1' || $sign_type == 'RSA_1_256') {
-            //$this->reqHandler->setRSAKey($this->cfg->C('private_rsa_key'));
+            $this->reqHandler->setRSAKey($this->cfg->C('private_rsa_key'));
             $this->resHandler->setRSAKey($this->cfg->C('public_rsa_key'));
             $this->reqHandler->setSignType($sign_type);
         }
