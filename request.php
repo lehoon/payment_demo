@@ -15,14 +15,13 @@ require('class/ClientResponseHandler.class.php');
 require('class/PayHttpClient.class.php');
 
 Class Request{
-  
-
     private $resHandler = null;
     private $reqHandler = null;
     private $pay = null;
     private $cfg = null;
-    
+
     public function __construct(){
+        Logger::InitFileLogger("./log/payment.log");
         $this->Request();
     }
 
@@ -49,6 +48,7 @@ Class Request{
     
     public function index(){
         $method = isset($_REQUEST['method'])?$_REQUEST['method']:'submitOrderInfo';
+        Logger::INFO("获取请求method=" . $method);
         switch($method){
             case 'submitOrderInfo'://提交订单
                 $this->submitOrderInfo();
@@ -88,9 +88,12 @@ Class Request{
         $this->reqHandler->createSign();//创建签名
         
         $data = Utils::toXml($this->reqHandler->getAllParameters());
+        Logger::INFO('生成请求数据:' .  $data);
         
         $this->pay->setReqContent($this->reqHandler->getGateURL(),$data);
         if($this->pay->call()){
+            Logger::INFO('getResContent:' . $this->pay->getResContent());
+            Logger::INFO('getDebugInfo:' . $this->resHandler->getDebugInfo());
             $this->resHandler->setContent($this->pay->getResContent());
             $this->resHandler->setKey($this->reqHandler->getKey());
             if($this->resHandler->isTenpaySign()){
