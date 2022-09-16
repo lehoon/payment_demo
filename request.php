@@ -84,7 +84,7 @@ Class Request{
         $this->reqHandler->setParameter('sign_type',$this->cfg->C('sign_type'));
 
         //通知地址，必填项，接收平台通知的URL，需给绝对路径，255字符内格式如:http://wap.tenpay.com/tenpay.asp
-		$this->reqHandler->setParameter('notify_url','http://payment.lehoon.com/callback');//支付成功异步回调通知地址，目前默认是斜杠，商户在测试支付和上线时必须改为自己的，且保证外网能访问到
+		$this->reqHandler->setParameter('notify_url','http://payment.lehoon.com/request.php?method=callback');//支付成功异步回调通知地址，目前默认是斜杠，商户在测试支付和上线时必须改为自己的，且保证外网能访问到
         $this->reqHandler->setParameter('nonce_str',mt_rand());//随机字符串，必填项，不长于 32 位
         $this->reqHandler->createSign();//创建签名
         
