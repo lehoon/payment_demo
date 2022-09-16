@@ -10,6 +10,7 @@
  */
 require('Utils.class.php');
 require('config/config.php');
+require('class/Logger.php');
 require('class/RequestHandler.class.php');
 require('class/ClientResponseHandler.class.php');
 require('class/PayHttpClient.class.php');
