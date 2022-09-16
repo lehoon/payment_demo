@@ -183,7 +183,7 @@ class RequestHandler {
 		}
 		$signPars .= "key=" . $this->getKey();
 		Logger::INFO('createMD5Sign.signPars=' . $signPars);
-		$sign = strtoupper(md5(urlencode($signPars)));
+		$sign = strtoupper(md5($signPars));
         Logger::INFO('createMD5Sign.sign=' . $sign);
 		$this->setParameter("sign", $sign);
 		
