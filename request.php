@@ -8,12 +8,12 @@
  * 
  * ================================================================
  */
-require('Utils.class.php');
-require('config/config.php');
-require('class/Logger.php');
-require('class/RequestHandler.class.php');
-require('class/ClientResponseHandler.class.php');
-require('class/PayHttpClient.class.php');
+require_once('Utils.class.php');
+require_once('config/config.php');
+require_once('class/Logger.php');
+require_once('class/RequestHandler.class.php');
+require_once('class/ClientResponseHandler.class.php');
+require_once('class/PayHttpClient.class.php');
 
 Class Request{
     private $resHandler = null;
