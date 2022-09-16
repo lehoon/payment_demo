@@ -94,7 +94,7 @@ Class Request{
         $this->pay->setReqContent($this->reqHandler->getGateURL(),$data);
         if($this->pay->call()){
             Logger::INFO('getResContent:' . $this->pay->getResContent());
-            Logger::INFO('getDebugInfo:' . $this->resHandler->getDebugInfo());
+            Logger::INFO('getDebugInfo:' . $this->reqHandler->getDebugInfo());
             $this->resHandler->setContent($this->pay->getResContent());
             $this->resHandler->setKey($this->reqHandler->getKey());
             if($this->resHandler->isTenpaySign()){
