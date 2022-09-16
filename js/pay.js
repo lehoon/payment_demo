@@ -63,7 +63,61 @@
 
 })(jQuery);
 
+function orderTime() {
+    var nowTime;
+    var time = new Date();
+    var year=time.getFullYear();
+    var month=time.getMonth()+1;
+    var date=time.getDate();
+    var hour=time.getHours();
+    var minute=time.getMinutes();
+    var seconds=time.getSeconds();
+    if(month<10){
+        month="0"+month;
+    }
+    if(date<10){
+        date="0"+date;
+    }
+    if(hour<10){
+        hour="0"+hour;
+    }
+    if(minute<10){
+        minute="0"+minute;
+    }
+    if(seconds<10){
+        seconds="0"+seconds;
+    }
+    nowTime=year+month+date+hour+minute+seconds+"";
+    return nowTime;
+}
 
+function orderOutTime() {
+    var nowTime;
+    var time = new Date();
+    var year=time.getFullYear();
+    var month=time.getMonth()+1;
+    var date=time.getDate();
+    var hour=time.getHours() - 1;
+    var minute=time.getMinutes() - 1;
+    var seconds=time.getSeconds() - 1;
+    if(month<10){
+        month="0"+month;
+    }
+    if(date<10){
+        date="0"+date;
+    }
+    if(hour<10){
+        hour="0"+hour;
+    }
+    if(minute<10){
+        minute="0"+minute;
+    }
+    if(seconds<10){
+        seconds="0"+seconds;
+    }
+    nowTime=year+month+date+hour+minute+seconds+"";
+    return nowTime;
+}
 
 (function(win,$,h){
     $(document).ready(function(){
@@ -89,6 +143,8 @@
                 $('#auto_center').html(tpl);
                 if(suffix === 'orderInfo'){
                     $('input[name=out_trade_no]').val((''+Math.random() * 10).substr(2));
+                    $('input[name=time_start]').val(orderTime());
+                    $('input[name=time_expire]').val(orderOutTime());
                 }else if(suffix === 'refundTest'){
                     $('input[name=out_refund_no]').val((''+Math.random() * 10).substr(2));
                 }
