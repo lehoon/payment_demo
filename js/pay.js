@@ -98,8 +98,6 @@
         time = /^(\d{14})?/;
         //初始化加载的页面
         loadHtml(routeUrl['orderInfo'],'orderInfo');
-        
-        
 
         $('div.menu li').bind('click',function(e){
             var curTarget = $(e.currentTarget), href = curTarget.attr('href'),suffix = href.substring(href.lastIndexOf('\.'));
