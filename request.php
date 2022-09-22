@@ -66,12 +66,23 @@ Class Request{
             case 'queryRefund'://查询退款
                 $this->queryRefund();
             break;
+            case 'payment':
+                $this->paymentTest();
+                break;
             case 'callback':
                 $this->callback();
             break;
         }
     }
-    
+
+    //获取客户端提交的xml信息
+    public function paymentTest() {
+        $xml = file_get_contents('php://input');
+        Logger::INFO("请求数据为:" . $xml);
+        echo $xml;
+    }
+
+
     /**
      * 提交订单信息
      */
