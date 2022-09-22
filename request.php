@@ -18,6 +18,7 @@ require_once('class/PayHttpClient.class.php');
 Class Request{
     private $resHandler = null;
     private $reqHandler = null;
+    private $paymentHandler = null;
     private $pay = null;
     private $cfg = null;
 
@@ -27,6 +28,7 @@ Class Request{
     }
 
     public function Request(){
+        $this->paymentHandler = new Payement();
         $this->resHandler = new ClientResponseHandler();
         $this->reqHandler = new RequestHandler();
         $this->pay = new PayHttpClient();
@@ -79,9 +81,8 @@ Class Request{
     public function paymentTest() {
         $xml = file_get_contents('php://input');
         Logger::INFO("请求数据为:" . $xml);
-        $pament = new Payement();
-        $pament->setContent($xml);
-        $pament->createMD5Sign();
+        $this->paymentHandler->setContent($xml);
+        $this->paymentHandler->createMD5Sign();
         echo $xml;
     }
 
