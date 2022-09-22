@@ -79,6 +79,9 @@ Class Request{
     public function paymentTest() {
         $xml = file_get_contents('php://input');
         Logger::INFO("请求数据为:" . $xml);
+        $pament = new Payement();
+        $pament->setContent($xml);
+        $pament->createMD5Sign();
         echo $xml;
     }
 
