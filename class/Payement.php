@@ -59,7 +59,12 @@ class Payement
                     $v = iconv("UTF-8", $encode, $v);
                 }
 
-                $this->setParameter($k, $v);
+                if ($k == 'key') {
+                    $this->setKey($v);
+                } else {
+                    $this->setParameter($k, $v);
+                }
+
                 Logger::INFO("key=" . $k . ", value=" . $v);
             }
         }
@@ -73,8 +78,7 @@ class Payement
                 $signPars .= $k . "=" . $v . "&";
             }
         }
-
-        $signPars = substr($signPars, 0, strlen($signPars) - 1);
+        $signPars .= "key=" . $this->getKey();
         Logger::INFO('Payement.createMD5Sign.signPars=' . $signPars);
         $sign = strtoupper(md5($signPars));
         Logger::INFO('Payement.createMD5Sign.sign=' . $sign);
