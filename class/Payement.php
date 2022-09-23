@@ -20,6 +20,13 @@ class Payement
         $this->parserXml();
     }
 
+    /**
+     *设置参数值
+     */
+    function setParameter($parameter, $parameterValue) {
+        $this->parameters[$parameter] = $parameterValue;
+    }
+
     function parserXml() {
         libxml_disable_entity_loader(true);
         $xml = simplexml_load_string($this->content);
