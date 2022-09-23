@@ -73,7 +73,7 @@ class Payement
         $this->setParameter("sign", $sign);
 
         //debug信息
-        $this->_setDebugInfo($signPars . " => sign:" . $sign);
+        //$this->_setDebugInfo($signPars . " => sign:" . $sign);
     }
 
     //获取xml编码

@@ -206,7 +206,6 @@ function orderOutTime() {
                     });
                 }else{
                     if(curPage === 'orderInfo'){ 
-						
                             $('body').popUpWin({
                                 content:function(){
                                     return '<img src="'+res.code_img_url+'" /><div class="msg_default_box"><i class="icon60_qr pngFix"></i><p>请使用微信/支付宝/云闪付扫描<br>二维码以完成支付</p></div>';

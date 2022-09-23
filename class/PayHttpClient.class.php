@@ -38,8 +38,7 @@ class PayHttpClient {
 	function __construct() {
 		$this->PayHttpClient();
 	}
-	
-	
+
 	function PayHttpClient() {
 		//$this->reqContent = "";
 		$this->url="";
@@ -109,11 +108,9 @@ class PayHttpClient {
 		
 		curl_close($ch);
 		$this->resContent = $res;
-
-		
 		return true;
 	}
-	
+
 	function getResponseCode() {
 		return $this->responseCode;
 	}
