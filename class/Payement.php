@@ -66,6 +66,7 @@ class Payement
             }
         }
 
+        $signPars = substr($signPars, 0, strlen($signPars) - 1);
         Logger::INFO('Payement.createMD5Sign.signPars=' . $signPars);
         $sign = strtoupper(md5($signPars));
         Logger::INFO('Payement.createMD5Sign.sign=' . $sign);
