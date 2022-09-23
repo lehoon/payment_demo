@@ -84,7 +84,38 @@ Class Request{
         Logger::INFO("请求数据为:" . $xml);
         $this->paymentHandler->setContent($xml);
         $this->paymentHandler->createMD5Sign();
-        echo $xml;
+        Logger::INFO("发送到网关请求数据为:" . $xml);
+        $this->pay->setReqContent($this->reqHandler->getGateURL(), $xml);
+        if($this->pay->call()){
+            Logger::INFO('getResContent:' . $this->pay->getResContent());
+            Logger::INFO('getDebugInfo:' . $this->reqHandler->getDebugInfo());
+            $this->resHandler->setContent($this->pay->getResContent());
+            $this->resHandler->setKey($this->reqHandler->getKey());
+            if($this->resHandler->isTenpaySign()){
+                //当返回状态与业务结果都为0时才返回支付二维码，其它结果请查看接口文档
+                if($this->resHandler->getParameter('status') == 0 && $this->resHandler->getParameter('result_code') == 0){
+                    /*echo json_encode(array('code_img_url'=>$this->resHandler->getParameter('code_img_url'),
+                        'code_url'=>$this->resHandler->getParameter('code_url'),
+                        'code_status'=>$this->resHandler->getParameter('code_status'),
+                        'type'=>$this->reqHandler->getParameter('service')), JSON_UNESCAPED_SLASHES);
+                    */
+                    echo $xml;
+                    exit();
+                }else{
+                    //echo json_encode(array('status'=>500,'msg'=>'Error Code:'.$this->resHandler->getParameter('err_code').' Error Message:'.$this->resHandler->getParameter('err_msg')));
+                    echo $xml;
+                    exit();
+                }
+            }
+
+            echo $xml;
+            exit();
+            //echo json_encode(array('status'=>500,'msg'=>'Error Code:'.$this->resHandler->getParameter('status').' Error Message:'.$this->resHandler->getParameter('message')));
+        }else{
+            echo $xml;
+            exit();
+            //echo json_encode(array('status'=>500,'msg'=>'Response Code:'.$this->pay->getResponseCode().' Error Info:'.$this->pay->getErrInfo()));
+        }
     }
 
 
