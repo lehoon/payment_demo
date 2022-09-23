@@ -27,6 +27,14 @@ class Payement
         $this->parameters[$parameter] = $parameterValue;
     }
 
+    /**
+     *获取所有请求的参数
+     *@return array
+     */
+    function getAllParameters() {
+        return $this->parameters;
+    }
+
     function parserXml() {
         libxml_disable_entity_loader(true);
         $xml = simplexml_load_string($this->content);
@@ -71,9 +79,6 @@ class Payement
         $sign = strtoupper(md5($signPars));
         Logger::INFO('Payement.createMD5Sign.sign=' . $sign);
         $this->setParameter("sign", $sign);
-
-        //debug信息
-        //$this->_setDebugInfo($signPars . " => sign:" . $sign);
     }
 
     //获取xml编码

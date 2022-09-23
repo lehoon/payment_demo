@@ -35,6 +35,7 @@ Class Request{
         $this->pay = new PayHttpClient();
         $this->cfg = new Config();
 
+        $this->pay->setTimeOut(60);
         $this->reqHandler->setGateUrl($this->cfg->C('url'));
 
         $sign_type = $this->cfg->C('sign_type');
@@ -84,8 +85,10 @@ Class Request{
         Logger::INFO("请求数据为:" . $xml);
         $this->paymentHandler->setContent($xml);
         $this->paymentHandler->createMD5Sign();
-        Logger::INFO("发送到网关请求数据为:" . $xml);
-        $this->pay->setReqContent($this->reqHandler->getGateURL(), $xml);
+
+        $data = Utils::toXml($this->paymentHandler->getAllParameters());
+        Logger::INFO("发送到网关请求数据为:" . $data);
+        $this->pay->setReqContent($this->reqHandler->getGateURL(), $data);
         if($this->pay->call()){
             Logger::INFO('getResContent:' . $this->pay->getResContent());
             Logger::INFO('getDebugInfo:' . $this->reqHandler->getDebugInfo());
