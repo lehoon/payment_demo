@@ -25,6 +25,7 @@ class Payement
         $xml = simplexml_load_string($this->content);
         $encode = $this->getXmlEncode($this->content);
 
+        Logger::INFO("xml编码格式:" . $encode);
         if($xml && $xml->children()) {
             foreach ($xml->children() as $node){
                 //有子节点
@@ -64,5 +65,15 @@ class Payement
 
         //debug信息
         $this->_setDebugInfo($signPars . " => sign:" . $sign);
+    }
+
+    //获取xml编码
+    function getXmlEncode($xml) {
+        $ret = preg_match ("/<?xml[^>]* encoding=\"(.*)\"[^>]* ?>/i", $xml, $arr);
+        if($ret) {
+            return strtoupper ( $arr[1] );
+        } else {
+            return "";
+        }
     }
 }
