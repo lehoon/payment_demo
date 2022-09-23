@@ -3,9 +3,9 @@
 
 class Payement
 {
+    var $key;
     var $content;
     var $parameters;
-
 
     function __construct() {
         $this->Payment();
@@ -52,6 +52,7 @@ class Payement
                 }
 
                 $this->setParameter($k, $v);
+                Logger::INFO("key=" . $k . ", value=" . $v);
             }
         }
     }
@@ -64,7 +65,7 @@ class Payement
                 $signPars .= $k . "=" . $v . "&";
             }
         }
-        $signPars .= "key=" . $this->getKey();
+
         Logger::INFO('Payement.createMD5Sign.signPars=' . $signPars);
         $sign = strtoupper(md5($signPars));
         Logger::INFO('Payement.createMD5Sign.sign=' . $sign);
@@ -82,5 +83,13 @@ class Payement
         } else {
             return "";
         }
+    }
+
+    function setKey($key) {
+        $this->key = $key;
+    }
+
+    function getKey() {
+        return $this->key;
     }
 }
