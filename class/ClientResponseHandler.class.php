@@ -136,6 +136,7 @@ class ClientResponseHandler  {
 	function isTenpaySign() {
 		$swiftpassSign = strtolower($this->getParameter("sign"));
 		if ($this->getParameter('sign_type') == 'MD5') {
+		    Logger::INFO("getMD5Sign() = " . $this->getMD5Sign() . ", sign=" . $swiftpassSign);
 			return $this->getMD5Sign() == $swiftpassSign;
 		} else if ($this->getParameter('sign_type') == 'RSA_1_1' || $this->getParameter('sign_type') == 'RSA_1_256') {
 			return $this->verifyRSASign();
@@ -151,7 +152,7 @@ class ClientResponseHandler  {
 			}
 		}
 		$signPars .= "key=" . $this->getKey();
-		
+		Logger::INFO("getMD5Sign.signPars=" . $signPars);
 		return strtolower(md5($signPars));
 	}
 
